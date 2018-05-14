@@ -208,11 +208,11 @@ extension GalleryItemViewController {
             case .PENDING:
                 mediaStatusView.isHidden = false
                 expiredHintLabel.isHidden = true
-                operationButton.style = .busy(0)
+                operationButton.style = .busy(progress: 0)
             case .DONE:
                 mediaStatusView.isHidden = true
                 expiredHintLabel.isHidden = true
-                operationButton.style = .finished
+                operationButton.style = .finished(showPlayIcon: false)
             case .CANCELED:
                 mediaStatusView.isHidden = false
                 expiredHintLabel.isHidden = true
@@ -225,7 +225,7 @@ extension GalleryItemViewController {
         } else {
             mediaStatusView.isHidden = true
             expiredHintLabel.isHidden = true
-            operationButton.style = .finished
+            operationButton.style = .finished(showPlayIcon: false)
         }
     }
     

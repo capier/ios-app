@@ -15,7 +15,7 @@ struct GalleryItem: Equatable {
         }
         self.messageId = message.messageId
         if let mediaUrl = message.mediaUrl {
-            self.url = MixinFile.chatPhotosUrl(mediaUrl)
+            self.url = MixinFile.url(ofChatDirectory: .photos, filename: mediaUrl)
         } else {
             self.url = nil
         }
@@ -35,7 +35,7 @@ struct GalleryItem: Equatable {
         }
         self.messageId = message.messageId
         if let mediaUrl = message.mediaUrl {
-            self.url = MixinFile.chatPhotosUrl(mediaUrl)
+            self.url = MixinFile.url(ofChatDirectory: .photos, filename: mediaUrl)
         } else {
             self.url = nil
         }

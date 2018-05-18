@@ -96,3 +96,11 @@ extension Date {
         }
     }
 }
+
+let hhmmssComponentsFormatter: DateComponentsFormatter = {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.zeroFormattingBehavior = [.pad]
+    formatter.unitsStyle = .positional
+    return formatter
+}()

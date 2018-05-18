@@ -6,6 +6,13 @@ class PhotoRepresentableMessageCell: DetailInfoMessageCell {
     let contentImageView = UIImageView()
     let shadowImageView = UIImageView()
     
+    internal lazy var contentSnapshotViews = [
+        contentImageView,
+        shadowImageView,
+        timeLabel,
+        statusImageView
+    ]
+    
     override var contentFrame: CGRect {
         return contentImageView.frame
     }
@@ -40,13 +47,10 @@ class PhotoRepresentableMessageCell: DetailInfoMessageCell {
         let view = UIImageView(frame: contentFrame)
         view.contentMode = .scaleAspectFit
         UIGraphicsBeginImageContextWithOptions(contentFrame.size, false, UIScreen.main.scale)
-        contentImageView.drawHierarchy(in: view.bounds, afterScreenUpdates: afterScreenUpdates)
-        let shadowRect = shadowImageView.convert(shadowImageView.bounds, to: contentImageView)
-        shadowImageView.drawHierarchy(in: shadowRect, afterScreenUpdates: afterScreenUpdates)
-        let timeRect = timeLabel.convert(timeLabel.bounds, to: contentImageView)
-        timeLabel.drawHierarchy(in: timeRect, afterScreenUpdates: afterScreenUpdates)
-        let statusRect = statusImageView.convert(statusImageView.bounds, to: contentImageView)
-        statusImageView.drawHierarchy(in: statusRect, afterScreenUpdates: afterScreenUpdates)
+        for view in contentSnapshotViews {
+            let rect = view.convert(view.bounds, to: contentImageView)
+            view.drawHierarchy(in: rect, afterScreenUpdates: afterScreenUpdates)
+        }
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         view.image = image
